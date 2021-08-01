@@ -29,6 +29,19 @@ public class ProductsController {
         return "products";
     }
 
+    @GetMapping("/{page}/{id}/cost/{action}")
+    public String changeCost(@PathVariable String page, @PathVariable Long id, @PathVariable String action) {
+        Product product = productsService.findById(id);
+        int productCurrentCost = product.getCost();
+        if (action.equals("increment")) {
+            product.setCost(++productCurrentCost);
+        }
+        if (action.equals("decrement")) {
+            product.setCost(--productCurrentCost);
+        }
+        return page.equals("product") ? "redirect:/show_all" : "redirect:/show/" + id;
+    }
+
     // GET [http://localhost:8189/webapp]/show/{id}
     @GetMapping("/show/{id}")
     public String showProductPage(Model model, @PathVariable Long id) {
