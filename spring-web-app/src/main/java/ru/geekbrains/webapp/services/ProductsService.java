@@ -28,4 +28,10 @@ public class ProductsService {
     public void save(Product product) {
         productsRepository.save(product);
     }
+
+    public void changeProductPrice(Long id, String action) {
+        Product product = findById(id);
+        int productCurrentCost = product.getCost();
+        product.setCost(action.equals("increment") ? ++productCurrentCost : --productCurrentCost);
+    }
 }
