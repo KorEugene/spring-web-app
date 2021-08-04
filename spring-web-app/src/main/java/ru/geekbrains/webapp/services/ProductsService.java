@@ -31,7 +31,7 @@ public class ProductsService {
 
     public void changeProductPrice(Long id, String action) {
         Product product = findById(id);
-        int productCurrentCost = product.getCost();
-        product.setCost(action.equals("increment") ? ++productCurrentCost : --productCurrentCost);
+        int productCurrentPrice = product.getPrice();
+        product.setPrice(action.equals("increment") ? ++productCurrentPrice : --productCurrentPrice);
     }
 }
