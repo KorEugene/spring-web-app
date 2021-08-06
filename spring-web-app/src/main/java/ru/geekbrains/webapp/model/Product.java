@@ -5,7 +5,6 @@ import lombok.*;
 import javax.persistence.*;
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
 @ToString
@@ -23,4 +22,9 @@ public class Product {
 
     @Column(name = "price")
     private int price;
+
+    public Product(String title, int price) {
+        this.title = title;
+        this.price = price;
+    }
 }

@@ -35,6 +35,12 @@ public class ProductsController {
         return page.equals("product") ? "redirect:/show_all" : "redirect:/show/" + id;
     }
 
+    @GetMapping("/delete/{id}")
+    public String removeProduct(@PathVariable Long id) {
+        productsService.deleteById(id);
+        return "redirect:/show_all";
+    }
+
     // GET [http://localhost:8189/webapp]/show/{id}
     @GetMapping("/show/{id}")
     public String showProductPage(Model model, @PathVariable Long id) {
@@ -48,8 +54,8 @@ public class ProductsController {
     }
 
     @PostMapping("/create")
-    public String saveProduct(@RequestParam Long id, @RequestParam String title, @RequestParam int price) {
-        Product product = new Product(id, title, price);
+    public String saveProduct(@RequestParam String title, @RequestParam int price) {
+        Product product = new Product(title, price);
         productsService.save(product);
         return "redirect:/show_all";
     }

@@ -29,6 +29,7 @@
                 <a th:href="@{'/product/' + ${p.id} + '/price/decrement'}" class="btn btn-outline-info">-</a>
             </td>
             <td>
+                <a th:href="@{'/delete/' + ${p.id}}" class="btn btn-outline-info">Удалить</a>
                 <a th:href="@{'/show/' + ${p.id}}" class="btn btn-outline-info">Инфо</a>
             </td>
         </tr>

@@ -1,24 +1,19 @@
 package ru.geekbrains.webapp.dao;
 
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.hibernate.cfg.Configuration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
-import javax.persistence.EntityManagerFactory;
+@org.springframework.context.annotation.Configuration
+public class SessionFactoryConfiguration {
 
-//@Configuration
-//public class SessionFactoryConfiguration {
-//
-//    @Autowired
-//    private EntityManagerFactory entityManagerFactory;
-//
-//    @Bean
-//    public SessionFactory getSessionFactory() {
-//        if (entityManagerFactory.unwrap(SessionFactory.class) == null) {
-//            throw new NullPointerException("factory is not a hibernate factory");
-//        }
-//        return entityManagerFactory.unwrap(SessionFactory.class);
-//    }
-//
-//}
+    @Bean
+    public SessionFactory sessionFactory() {
+        return new Configuration()
+                .configure("hibernate.cfg.xml")
+                .buildSessionFactory();
+    }
+
+}
+
+

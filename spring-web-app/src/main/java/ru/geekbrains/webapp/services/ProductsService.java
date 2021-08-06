@@ -4,9 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.geekbrains.webapp.dao.ProductDao;
 import ru.geekbrains.webapp.model.Product;
-import ru.geekbrains.webapp.repositories.ProductsRepository;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductsService {
@@ -19,7 +20,7 @@ public class ProductsService {
     }
 
     public List<Product> findAll() {
-        return productDao.findAll();
+        return productDao.findAll().stream().sorted(Comparator.comparing(Product::getId)).collect(Collectors.toList());
     }
 
     public Product findById(Long id) {
