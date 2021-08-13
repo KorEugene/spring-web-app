@@ -13,16 +13,12 @@
     <h2>Добавить продукт</h2>
     <form method="post" th:action="@{'/create'}">
         <div class="mb-3">
-            <label for="productId" class="form-label">ID</label>
-            <input type="number" name="id" class="form-control" id="productId">
-        </div>
-        <div class="mb-3">
             <label for="productTitle" class="form-label">Название</label>
             <input type="text" name="title" class="form-control" id="productTitle">
         </div>
         <div class="mb-3">
-            <label for="productCost" class="form-label">Стоимость</label>
-            <input type="number" name="cost" class="form-control" id="productCost">
+            <label for="productPrice" class="form-label">Стоимость</label>
+            <input type="number" name="price" class="form-control" id="productPrice">
         </div>
         <button class="btn btn-primary" type="submit">Сохранить</button>
     </form>

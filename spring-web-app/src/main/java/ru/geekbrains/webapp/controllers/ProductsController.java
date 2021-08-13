@@ -29,10 +29,16 @@ public class ProductsController {
         return "products";
     }
 
-    @GetMapping("/{page}/{id}/cost/{action}")
-    public String changeCost(@PathVariable String page, @PathVariable Long id, @PathVariable String action) {
+    @GetMapping("/{page}/{id}/price/{action}")
+    public String changePrice(@PathVariable String page, @PathVariable Long id, @PathVariable String action) {
         productsService.changeProductPrice(id, action);
         return page.equals("product") ? "redirect:/show_all" : "redirect:/show/" + id;
+    }
+
+    @GetMapping("/delete/{id}")
+    public String removeProduct(@PathVariable Long id) {
+        productsService.deleteById(id);
+        return "redirect:/show_all";
     }
 
     // GET [http://localhost:8189/webapp]/show/{id}
@@ -48,8 +54,8 @@ public class ProductsController {
     }
 
     @PostMapping("/create")
-    public String saveProduct(@RequestParam Long id, @RequestParam String title, @RequestParam int cost) {
-        Product product = new Product(id, title, cost);
+    public String saveProduct(@RequestParam String title, @RequestParam int price) {
+        Product product = new Product(title, price);
         productsService.save(product);
         return "redirect:/show_all";
     }

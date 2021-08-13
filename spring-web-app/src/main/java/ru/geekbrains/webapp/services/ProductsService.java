@@ -2,36 +2,43 @@ package ru.geekbrains.webapp.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.geekbrains.webapp.dao.ProductDao;
 import ru.geekbrains.webapp.model.Product;
-import ru.geekbrains.webapp.repositories.ProductsRepository;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductsService {
 
-    private ProductsRepository productsRepository;
+    private ProductDao productDao;
 
     @Autowired
-    public ProductsService(ProductsRepository productsRepository) {
-        this.productsRepository = productsRepository;
+    public ProductsService(ProductDao productDao) {
+        this.productDao = productDao;
     }
 
     public List<Product> findAll() {
-        return productsRepository.findAll();
+        return productDao.findAll().stream().sorted(Comparator.comparing(Product::getId)).collect(Collectors.toList());
     }
 
     public Product findById(Long id) {
-        return productsRepository.findById(id);
+        return productDao.findById(id);
     }
 
     public void save(Product product) {
-        productsRepository.save(product);
+        productDao.saveOrUpdate(product);
+    }
+
+    public void deleteById(Long id) {
+        productDao.deleteById(id);
     }
 
     public void changeProductPrice(Long id, String action) {
         Product product = findById(id);
-        int productCurrentCost = product.getCost();
-        product.setCost(action.equals("increment") ? ++productCurrentCost : --productCurrentCost);
+        int productCurrentPrice = product.getPrice();
+        product.setPrice(action.equals("increment") ? ++productCurrentPrice : --productCurrentPrice);
+        save(product);
     }
 }

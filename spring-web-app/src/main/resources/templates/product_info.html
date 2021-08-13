@@ -13,9 +13,9 @@
     <h2>Информация о продукте</h2>
     <h3 th:text="${'ID: ' + product.id}"></h3>
     <h3 th:text="${'Название: ' + product.title}"></h3>
-    <h3 style="display: inline-block" th:text="${'Стоимость: ' + product.cost}"></h3>
-    <a th:href="@{'/show/' + ${product.id} + '/cost/increment'}" class="btn btn-outline-info">+</a>
-    <a th:href="@{'/show/' + ${product.id} + '/cost/decrement'}" class="btn btn-outline-info">-</a>
+    <h3 style="display: inline-block" th:text="${'Стоимость: ' + product.price}"></h3>
+    <a th:href="@{'/show/' + ${product.id} + '/price/increment'}" class="btn btn-outline-info">+</a>
+    <a th:href="@{'/show/' + ${product.id} + '/price/decrement'}" class="btn btn-outline-info">-</a>
     <p></p>
     <a th:href="@{'/show_all'}" class="btn btn-primary">К списку продуктов</a>
 </div>
